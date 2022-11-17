@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KayJay.WebCli", "KayJay.WebCli\KayJay.WebCli.csproj", "{C413D13D-CBEC-4C76-BB13-359AF647AABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KayJay.WebCli.Sample", "KayJay.WebCli.Sample\KayJay.WebCli.Sample.csproj", "{04ECEE6B-BE2F-44CE-96A6-8E80F76AB1ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C413D13D-CBEC-4C76-BB13-359AF647AABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C413D13D-CBEC-4C76-BB13-359AF647AABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C413D13D-CBEC-4C76-BB13-359AF647AABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C413D13D-CBEC-4C76-BB13-359AF647AABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04ECEE6B-BE2F-44CE-96A6-8E80F76AB1ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04ECEE6B-BE2F-44CE-96A6-8E80F76AB1ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04ECEE6B-BE2F-44CE-96A6-8E80F76AB1ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04ECEE6B-BE2F-44CE-96A6-8E80F76AB1ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF1C9CCA-15B6-4A86-968C-225AB26CA63A}
+	EndGlobalSection
+EndGlobal

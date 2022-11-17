@@ -1,9 +1,9 @@
-using System.Text;
+﻿using System.Diagnostics;
 using System.Net.WebSockets;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Text;
 
-namespace WebCli
+namespace KayJay.WebCli
 {
     public class WebConsole
     {
