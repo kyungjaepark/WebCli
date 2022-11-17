@@ -97,17 +97,8 @@ namespace KayJay.WebCli
 
                 app.Run();
 
-                /*TODO?
-                app.Run(async (context) =>
-{
-    using var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-    var socketFinishedTcs = new TaskCompletionSource<object>();
-
-    BackgroundSocketProcessor.AddSocket(webSocket, socketFinishedTcs);
-
-    await socketFinishedTcs.Task;
-});
-*/
+                // TODO? https://learn.microsoft.com/en-us/aspnet/core/fundamentals/websockets?view=aspnetcore-7.0#accept-websocket-requests
+                // If you're using a background service to write data to a WebSocket, make sure you keep the middleware pipeline running.'
             }
             catch { }
 
@@ -190,11 +181,10 @@ namespace KayJay.WebCli
                 }
             }
         }
-    }
 
-    public class HtmlFile
-    {
-        public static string IndexHtml = @"
+        private class HtmlFile
+        {
+            public static string IndexHtml = @"
 
 <!DOCTYPE html>
 <html>
@@ -455,5 +445,6 @@ namespace KayJay.WebCli
 </html>
 
 ";
+        }
     }
 }
