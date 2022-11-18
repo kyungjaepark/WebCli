@@ -2,6 +2,8 @@
 
 WebCli is a library that handles the output and input of console app in a web browser.
 
+- [NuGet Package](https://www.nuget.org/packages/KayJay.WebCli)
+
 ![](./docs/webcli.webp)
 
 # Sample Code
