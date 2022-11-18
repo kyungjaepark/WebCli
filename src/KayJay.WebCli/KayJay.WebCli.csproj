@@ -9,7 +9,7 @@
 		<IsPackable>True</IsPackable>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<VersionPrefix>0.0.2</VersionPrefix>
+		<VersionPrefix>0.0.3</VersionPrefix>
 		<RepositoryUrl>https://github.com/kyungjaepark/WebCli</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>

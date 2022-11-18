@@ -112,43 +112,48 @@ namespace KayJay.WebCli
             WebConsole.webSocket = webSocket;
         }
 
-        public async static Task Write(String s)
+        public static void Write(String s)
         {
             if (webSocket == null)
                 return;
             var buffer = utf8Encoding.GetBytes(s);
-            await webSocket.SendAsync(
+            Task sendTask = Task.Run(()=>webSocket.SendAsync(
                     new ArraySegment<byte>(buffer, 0, buffer.Length),
                     WebSocketMessageType.Text,
                     true,
-                    CancellationToken.None);
+                    CancellationToken.None));
+            sendTask.Wait();
         }
 
-        public async static Task WriteLine(String s)
+        public static void WriteLine(String s)
         {
-            await Write(s);
-            await WriteLine();
+            Write(s);
+            WriteLine();
         }
-        public async static Task WriteLine()
+        public static void WriteLine()
         {
-            await Write("\n");
+            Write("\n");
         }
 
-        public async static Task<String> ReadLine()
+        public static String ReadLine()
         {
 
             if (webSocket == null)
                 return "";
             var buffer_bin = new byte[] { 0 };
-            await webSocket.SendAsync(
+            Task sendTask = Task.Run(() => webSocket.SendAsync(
                     new ArraySegment<byte>(buffer_bin, 0, buffer_bin.Length),
                     WebSocketMessageType.Binary,
                     true,
-                    CancellationToken.None);
+                    CancellationToken.None));
+            sendTask.Wait();
 
             var buffer = new byte[16384];
-            var receiveResult = await webSocket.ReceiveAsync(
-                new ArraySegment<byte>(buffer), CancellationToken.None);
+            
+            var receieveTask = Task.Run(()=>webSocket.ReceiveAsync(
+                new ArraySegment<byte>(buffer), CancellationToken.None));
+            receieveTask.Wait();
+            var receiveResult = receieveTask.Result;
             return utf8Encoding.GetString(buffer, 0, receiveResult.Count);
         }
 
