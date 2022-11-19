@@ -4,27 +4,27 @@ WebConsole.Init(args, WebMain);
 
 static async Task WebMain(string[] args)
 {
-    WebConsole.WriteLine("WebCli Sample");
-    WebConsole.WriteLine("=============");
+    Console.WriteLine("WebCli Sample");
+    Console.WriteLine("=============");
     for (int i = 3; i > 0; i--)
     {
-        WebConsole.WriteLine($"System will begin in {i} seconds..");
+        Console.WriteLine($"System will begin in {i} seconds..");
         await Task.Delay(1000);
     }
 
     while (true)
     {
-        WebConsole.WriteLine("--------------------------------------------");
-        WebConsole.WriteLine("Please input any sentence: I'll echo you it.");
-        WebConsole.WriteLine("enter 'exit' to exit.");
-        WebConsole.Write("input : ");
-        string message = WebConsole.ReadLine();
+        Console.WriteLine("--------------------------------------------");
+        Console.WriteLine("Please input any sentence: I'll echo you it.");
+        Console.WriteLine("enter 'exit' to exit.");
+        Console.Write("input : ");
+        string message = Console.ReadLine();
         if (message.Trim() == "exit")
         {
-            WebConsole.WriteLine("Exit...");
+            Console.WriteLine("Exit...");
             return;
         }
         await Task.Delay(1000);
-        WebConsole.WriteLine("You entered : " + message);
+        Console.WriteLine("You entered : " + message);
     }
 }
