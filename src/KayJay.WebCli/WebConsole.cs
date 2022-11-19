@@ -11,14 +11,17 @@ namespace KayJay.WebCli
         public static WebSocket? webSocket;
 
         public static WebMainDelegate? webMainDelegate;
+        public static int returnValue = 0;
 
-        public delegate Task WebMainDelegate(string[] args);
+        public delegate Task<int> WebMainDelegate(string[] args);
 
-        public static void Init(string[] args, WebMainDelegate webMainDelegate, bool redirectConsole = true)
+        public static int Init(string[] args, WebMainDelegate webMainDelegate, bool redirectConsole = true)
         {
 
             WebCli.WebConsole.Args = args;
             WebCli.WebConsole.webMainDelegate = webMainDelegate;
+
+            WebConsole.returnValue = 0;
 
             bool wwwRootExists = Directory.Exists("wwwroot");
             if (wwwRootExists == false)
@@ -62,7 +65,7 @@ namespace KayJay.WebCli
                                 {
                                     RedirectConsole();
                                 }
-                                await WebConsole.webMainDelegate(WebCli.WebConsole.Args);
+                                WebConsole.returnValue = await WebConsole.webMainDelegate(WebCli.WebConsole.Args);
                                 await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None);
                             }
                             catch
@@ -112,7 +115,7 @@ namespace KayJay.WebCli
                 // If you're using a background service to write data to a WebSocket, make sure you keep the middleware pipeline running.'
             }
             catch { }
-
+            return WebConsole.returnValue;
 
         }
         public static string[] Args = new string[] { };
