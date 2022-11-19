@@ -39,3 +39,19 @@ static async Task WebMain(string[] args)
 ```
 
 The default browser screen with your application will appear.
+
+# Roadmap
+
+- WebConsole.RedirectConsole() : You can use WebConsole with standard Console Method
+ - Console.WriteLine / Console.ReadLine / Console.Out / Console.In / Console.Error ...
+- Various Method
+ - WebConsole.WriteFile()
+ - WebConsole.WriteImage()
+ - WebConsole.WriteTable()
+ - WebConsole.ReadPassword()
+ - WebConsole.ReadMultiline()
+ - WebConsole.ReadFile()
+ ...
+
+
+ 
