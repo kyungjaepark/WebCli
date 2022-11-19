@@ -50,3 +50,18 @@ static async Task WebMain(string[] args)
 
 You'll get an interactive browser app!
 
+
+
+# Roadmap
+
+- WebConsole.RedirectConsole() : You can use WebConsole with standard Console Method
+ - Console.WriteLine / Console.ReadLine / Console.Out / Console.In / Console.Error ...
+- Various Method
+ - WebConsole.WriteFile()
+ - WebConsole.WriteImage()
+ - WebConsole.WriteTable()
+ - WebConsole.ReadPassword()
+ - WebConsole.ReadMultiline()
+ - WebConsole.ReadFile()
+ ...
+	
