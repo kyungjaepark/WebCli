@@ -14,7 +14,7 @@ namespace KayJay.WebCli
 
         public delegate Task WebMainDelegate(string[] args);
 
-        public static void Init(string[] args, WebMainDelegate webMainDelegate)
+        public static void Init(string[] args, WebMainDelegate webMainDelegate, bool redirectConsole = true)
         {
 
             WebCli.WebConsole.Args = args;
@@ -30,6 +30,7 @@ namespace KayJay.WebCli
                 var builder = WebApplication.CreateBuilder(args);
                 builder.WebHost.UseKestrel().UseUrls("http://[::1]:0");
                 builder.Host.ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.Warning));
+                builder.Services.Configure<HostOptions>(opts => opts.ShutdownTimeout = TimeSpan.Zero);
                 var app = builder.Build();
 
                 // https://medium.com/geekculture/run-code-once-the-application-starts-in-net6-2e4e965ddcec
@@ -57,6 +58,10 @@ namespace KayJay.WebCli
                             WebConsole.SetWebSocket(webSocket);
                             try
                             {
+                                if (redirectConsole)
+                                {
+                                    RedirectConsole();
+                                }
                                 await WebConsole.webMainDelegate(WebCli.WebConsole.Args);
                                 await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None);
                             }
@@ -64,6 +69,12 @@ namespace KayJay.WebCli
                             {
 
                             }
+
+                            if (redirectConsole)
+                            {
+                                FinishRedirectConsole();
+                            }
+
                             await app.StopAsync();
                             if (wwwRootExists == false)
                             {
@@ -106,6 +117,32 @@ namespace KayJay.WebCli
         }
         public static string[] Args = new string[] { };
 
+        public static TextWriter? old_out = null;
+        public static TextWriter? old_error = null;
+        public static TextReader? old_in = null;
+
+        public static void RedirectConsole()
+        {
+            old_out = Console.Out;
+            old_error = Console.Error;
+            old_in = Console.In;
+            Console.SetOut(new WebConsoleTextWriter());
+            Console.SetError(new WebConsoleTextWriter());
+            Console.SetIn(new WebConsoleTextReader());
+        }
+
+        public static void FinishRedirectConsole()
+        {
+            if (old_out != null)
+                Console.SetOut(old_out);
+            if (old_error != null)
+                Console.SetError(old_error);
+            if (old_in != null)
+                Console.SetIn(old_in);
+            old_out = null;
+            old_error = null;
+            old_in = null;
+        }
 
         public static void SetWebSocket(WebSocket webSocket)
         {
@@ -196,7 +233,7 @@ namespace KayJay.WebCli
 
 <head>
     <meta charset=""utf-8"" />
-    <title></title>
+    <title>WebCli</title>
     <style>
         table {
             border: 0
