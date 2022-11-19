@@ -30,6 +30,7 @@ namespace KayJay.WebCli
                 var builder = WebApplication.CreateBuilder(args);
                 builder.WebHost.UseKestrel().UseUrls("http://[::1]:0");
                 builder.Host.ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.Warning));
+                builder.Services.Configure<HostOptions>(opts => opts.ShutdownTimeout = TimeSpan.Zero);
                 var app = builder.Build();
 
                 // https://medium.com/geekculture/run-code-once-the-application-starts-in-net6-2e4e965ddcec
