@@ -6,39 +6,25 @@ WebCli is a library that handles the output and input of console app in a web br
 
 ![](./docs/webcli.webp)
 
-# Sample Code
+# How to convert exisiting CLI project to WebCLI
 
+1. Add KayJay.WebCli Nuget Package
 ```
-dotnet new console
 dotnet add package KayJay.WebCli
 ```
 
+2. Rename your Main() method to WebMain(), And add Main() function as following:
 
-Program.cs : 
-```
-using KayJay.WebCli;
-
-internal class Program
+```C#
+private static async Task<int> Main(string[] args)
 {
-    private static async Task<int> Main(string[] args)
-    {
-        return WebConsole.Init(args, WebMain);
-    }
-
-    static async Task<int> WebMain(string[] args)
-    {
-        Console.WriteLine("WebCli Sample");
-        Console.Write("Please input any sentence: ");
-        string message = Console.ReadLine();
-        if (message != null)
-            Console.WriteLine("You entered : " + message);
-        return 0;
-    }
+    return WebConsole.Init(args, WebMain);
 }
 ```
 
 You'll get an interactive browser app!
 
+![](./docs/webcli-convert.gif)
 
 
 # Roadmap
