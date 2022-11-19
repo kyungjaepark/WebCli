@@ -1,19 +1,31 @@
-﻿namespace KayJay.WebCli
+﻿using System.Net.WebSockets;
+using System.Text;
+
+namespace KayJay.WebCli
 {
 
     public class WebConsoleTextReader : TextReader
     {
+        String BufferString = ""; // TOOD : Stream or Span<>
         public override int Peek()
         {
-            WebConsole.old_out?.WriteLine("Peek() called.");
-            return WebConsole.old_in?.Peek() ?? 0;
+            if (String.IsNullOrEmpty(BufferString))
+                return -1;
+            return (int)BufferString[0];
         }
 
         public override int Read()
         {
-            WebConsole.old_out?.WriteLine($"Read() called.");
-            var ret = WebConsole.old_in?.Read() ?? 0;
-            WebConsole.old_out?.WriteLine($"value = {ret}");
+            if (String.IsNullOrEmpty(BufferString))
+            {
+                var lineText = WebConsole.ReadLine();
+                if (String.IsNullOrEmpty(lineText) == false)
+                    BufferString += lineText + Environment.NewLine;
+            }
+            if (String.IsNullOrEmpty(BufferString))
+                return -1;
+            var ret = (int)BufferString[0];
+            BufferString = BufferString.Substring(1);
             return ret;
         }
     }

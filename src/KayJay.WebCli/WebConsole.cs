@@ -233,7 +233,7 @@ namespace KayJay.WebCli
 
 <head>
     <meta charset=""utf-8"" />
-    <title></title>
+    <title>WebCli</title>
     <style>
         table {
             border: 0

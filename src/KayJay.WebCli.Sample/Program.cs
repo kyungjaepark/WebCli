@@ -19,12 +19,15 @@ static async Task WebMain(string[] args)
         Console.WriteLine("enter 'exit' to exit.");
         Console.Write("input : ");
         string message = Console.ReadLine();
+        if (message == null)
+            continue;
+
         if (message.Trim() == "exit")
         {
             Console.WriteLine("Exit...");
             return;
         }
-        await Task.Delay(1000);
         Console.WriteLine("You entered : " + message);
+        await Task.Delay(1000);
     }
 }
