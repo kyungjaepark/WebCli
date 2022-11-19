@@ -4,6 +4,11 @@ internal class Program
 {
     private static async Task<int> Main(string[] args)
     {
+        return WebConsole.Init(args, WebMain);
+    }
+
+    static async Task<int> WebMain(string[] args)
+    {
         Console.WriteLine("WebCli Sample");
         Console.WriteLine("=============");
         for (int i = 3; i > 0; i--)
