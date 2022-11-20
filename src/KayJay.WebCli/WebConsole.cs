@@ -10,12 +10,10 @@ namespace KayJay.WebCli
         public static Encoding utf8Encoding = new UTF8Encoding(false, false);
         public static WebSocket? webSocket;
 
-        public static WebMainDelegate? webMainDelegate;
+        public static Func<string[], Task<int>>? webMainDelegate;
         public static int returnValue = 0;
 
-        public delegate Task<int> WebMainDelegate(string[] args);
-
-        public static int Init(string[] args, WebMainDelegate webMainDelegate, bool redirectConsole = true)
+        public static int Init(string[] args, Func<string[], Task<int>> webMainDelegate, bool redirectConsole = true)
         {
 
             WebCli.WebConsole.Args = args;
